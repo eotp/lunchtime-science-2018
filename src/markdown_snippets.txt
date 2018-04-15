@@ -1,0 +1,27 @@
+### The normal distribution
+
+The [__normal distribution__](https://en.wikipedia.org/wiki/Normal_distribution) is used extensively in probability theory, statistics, and the natural and social sciences. It is also called the Gaussian distribution because [Carl Friedrich Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss) (1777-1855) was one of the first to apply it for the analysis of astronomical data.
+
+The normal probability distribution or the normal curve is a bell-shaped (symmetric) curve. Its mean is denoted by $\mu$ and its standard deviation by $\sigma$. A continuous random variable $X$ that has a normal distribution is called a normal random variable.
+
+The notation for a normal distribution is $X \sim (\mu, \sigma)$. The probability density function is written as
+
+$$f(x)=\frac{1}{\sigma  \sqrt{2 \pi}}e^{-\frac{1}{2}\left( \frac{x-\mu}{\sigma} \right)}$$
+
+
+where $e \approx 2.71828$ and $pi \approx 3.14159$. The probability density function $f(x)$ gives the vertical distance between the horizontal axis and the normal curve at point $x$.
+
+
+
+### Images
+
+![](_img/pull_out_another_tooth.png)
+
+Source: [Wiki commons](https://commons.wikimedia.org/wiki/Category:Teeth_in_art#/media/File:A_woman_reaches_down_into_a_man%27s_throat_to_pull_out_another_tooth_Wellcome_V0011763.jpg)
+
+
+
+### pdf-files
+
+from IPython.display import IFrame
+IFrame("../slides/slides_krois_2018-04-18.pdf", width="100%", height=600)
