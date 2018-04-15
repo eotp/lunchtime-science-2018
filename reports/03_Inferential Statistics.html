@@ -1,0 +1,1134 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. The statsmodels library &mdash; Lunchtime Science  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="3. Plotting with Python" href="02_Plotting.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="start.html" class="icon icon-home"> Lunchtime Science
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_getting started.html">1. Getting started with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_A simple data analysis.html">2. Processing of tabular data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Plotting.html">3. Plotting with Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. The statsmodels library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Population-and-Sample-Statistics">4.1. Population and Sample Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Point-Estimate-and-Confidence-Interval">4.2. Point Estimate and Confidence Interval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Interval-Estimate">4.2.1. Interval Estimate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Hypothesis-Testing">4.3. Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Multiple-comparisons">4.4. Multiple comparisons</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="start.html">Lunchtime Science</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="start.html">Docs</a> &raquo;</li>
+        
+      <li>4. The statsmodels library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/03_Inferential Statistics.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="The-statsmodels-library">
+<h1>4. The statsmodels library<a class="headerlink" href="#The-statsmodels-library" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.statsmodels.org/dev/index.html#">statsmodels</a> is a Python
+module that provides classes and functions for the estimation of many
+different <strong>statistical models</strong>, as well as for conducting
+<strong>statistical tests</strong>, and <strong>statistical data exploration</strong>.</p>
+<ul class="simple">
+<li>Regression Analysis</li>
+<li>Linear Mixed Effects Models</li>
+<li>ANOVA</li>
+<li>Time Series analysis</li>
+<li>Parametric and Nonparametric Statistical Methods</li>
+<li>Multivariate Statistics multivariate</li>
+<li>Distributions</li>
+<li>and many more…</li>
+</ul>
+<p><strong>Add the</strong> <code class="docutils literal notranslate"><span class="pre">src</span></code> <strong>directory as one where we can import modules</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># add the &#39;src&#39; directory as one where we can import modules</span>
+<span class="n">src_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="s1">&#39;src&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src_dir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">src_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+C:\Users\josi\Documents\Lunchtime Science - April 2018\lunchtime-science-2018\src
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">helper_funcs</span> <span class="k">as</span> <span class="nn">hf</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Load modules</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Population-and-Sample-Statistics">
+<h2>4.1. Population and Sample Statistics<a class="headerlink" href="#Population-and-Sample-Statistics" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Statistical_inference">Inferential
+statistics</a> is
+all about using <strong>sample results</strong> to make decisions or predictions
+about a <strong>population</strong>. Basically, a numerical value is assigned to a
+population parameter based on the information collected from a sample.</p>
+<p><strong>Load the data set</strong></p>
+<p>Source <a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ChickWeight.html">Crowder, M. and Hand, D.
+(1990)</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">chicken</span><span class="p">,</span> <span class="n">chick_diet1</span><span class="p">,</span> <span class="n">chick_diet2</span><span class="p">,</span> <span class="n">chick_diet3</span><span class="p">,</span> <span class="n">chick_diet4</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">load_chicken</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">chicken</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Chick</th>
+      <th>Diet</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>116</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>1</td>
+      <td>114</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>1</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>1</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>1</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>1</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>1</td>
+      <td>114</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>1</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>1</td>
+      <td>151</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>1</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>1</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>1</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>1</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>1</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>1</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>2</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>2</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>2</td>
+      <td>111</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>2</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>2</td>
+      <td>143</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>2</td>
+      <td>131</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>2</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>2</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>2</td>
+      <td>142</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>2</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>3</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32</td>
+      <td>3</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>3</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>3</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35</td>
+      <td>3</td>
+      <td>193</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>3</td>
+      <td>135</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>37</td>
+      <td>3</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>3</td>
+      <td>142</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>39</td>
+      <td>3</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>3</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>41</td>
+      <td>4</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>42</td>
+      <td>4</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>43</td>
+      <td>4</td>
+      <td>143</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>44</td>
+      <td>4</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>45</td>
+      <td>4</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>4</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>47</td>
+      <td>4</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>48</td>
+      <td>4</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>49</td>
+      <td>4</td>
+      <td>138</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>50</td>
+      <td>4</td>
+      <td>148</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">chicken</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/03_Inferential_Statistics_12_0.png" src="_images/03_Inferential_Statistics_12_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">diet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chicken</span><span class="o">.</span><span class="n">Diet</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">chicken</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">chicken</span><span class="o">.</span><span class="n">Diet</span><span class="o">==</span><span class="n">diet</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diet </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">diet</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/03_Inferential_Statistics_13_0.png" src="_images/03_Inferential_Statistics_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Point-Estimate-and-Confidence-Interval">
+<h2>4.2. Point Estimate and Confidence Interval<a class="headerlink" href="#Point-Estimate-and-Confidence-Interval" title="Permalink to this headline">¶</a></h2>
+<p>Given a sample, the value of the computed sample statistic gives a point
+estimate of the corresponding population parameter. For example, the
+sample mean <span class="math notranslate">\((\bar x)\)</span>, is a point estimate of the corresponding
+population mean, <span class="math notranslate">\(\mu\)</span>, or the sample standard deviation <span class="math notranslate">\(s\)</span>
+is a point estimate for the population standard deviation
+<span class="math notranslate">\(\sigma\)</span>.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Sampling_error">sampling error</a>
+(the point estimate almost always differs from the true value of the
+population)</li>
+</ul>
+<div class="section" id="Interval-Estimate">
+<h3>4.2.1. Interval Estimate<a class="headerlink" href="#Interval-Estimate" title="Permalink to this headline">¶</a></h3>
+<p>Instead of assigning a single value to a population parameter, an
+interval estimation gives a probabilistic statement, relating the given
+interval to the probability that this interval actually contains the
+true (unknown) population parameter.</p>
+<p>The level of confidence is chosen a priori and thus depends on the users
+preferences. It is denoted by</p>
+<div class="math notranslate">
+\[100(1-\alpha)\]</div>
+<p>Although any value of confidence level can be chosen, the most common
+values are 90%, 95%, and 99%. When expressed as probability, the
+confidence level is called the confidence coefficient and is denoted by
+(1−:math:<cite>alpha</cite>). Most common confidence coefficients are 0.90, 0.95,
+and 0.99, respectively.</p>
+<p>A 100(1−<span class="math notranslate">\(\alpha\)</span>)% confidence interval is an interval estimate
+around a population parameter <span class="math notranslate">\(\theta\)</span> (here, the Greek letter
+<span class="math notranslate">\(\theta\)</span> is a placeholder for any population parameter of interest
+such as the mean <span class="math notranslate">\(\mu\)</span>, or the standard deviation <span class="math notranslate">\(\sigma\)</span>,
+among others) that, under repeated random samples of size <span class="math notranslate">\(N\)</span>, is
+expected to include <span class="math notranslate">\(\theta\)</span>’s true value
+100(1−<span class="math notranslate">\(\alpha\)</span>)% of the time (<a class="reference external" href="http://www.springer.com/de/book/9783642048975">Lovric
+2010</a>).</p>
+<p>The actual number added to and subtracted from the point estimate is
+called the margin of error.</p>
+<div class="math notranslate">
+\[CI:\text{Point estimate} \pm \text{Margin of error (ME)}\]</div>
+<p>Thus, the margin of error (ME) is expressed as</p>
+<div class="math notranslate">
+\[ME = z^*_{\alpha/2} \times \frac{\sigma}{\sqrt{n}}\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.weightstats</span> <span class="k">import</span> <span class="n">DescrStatsW</span>
+<span class="n">d_stats</span> <span class="o">=</span> <span class="n">DescrStatsW</span><span class="p">(</span><span class="n">chicken</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">d_mean</span> <span class="o">=</span> <span class="n">d_stats</span><span class="o">.</span><span class="n">mean</span>
+<span class="n">d_mean</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>119.28
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">d_conf_int</span> <span class="o">=</span> <span class="n">d_stats</span><span class="o">.</span><span class="n">tconfint_mean</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d_conf_int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(109.88771007746364, 128.67228992253635)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sig_level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">lower_ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">d_conf_int</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">upper_ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">d_conf_int</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are </span><span class="si">{}% c</span><span class="s2">onfident that the true weight of chicken is between </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> grams.&quot;</span><span class="o">.</span>
+       <span class="nb">format</span><span class="p">(</span><span class="n">sig_level</span><span class="p">,</span> <span class="n">lower_ci</span><span class="p">,</span> <span class="n">upper_ci</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+We are 95% confident that the true weight of chicken is between 109.9 and 128.7 grams.
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Hypothesis-Testing">
+<h2>4.3. Hypothesis Testing<a class="headerlink" href="#Hypothesis-Testing" title="Permalink to this headline">¶</a></h2>
+<p>A very common problem that scientists face is the assessment of
+significance in scattered statistical data. Owing to the limited
+availability of observational data, scientists apply <strong>inferential
+statistical methods to decide if the observed data contains significant
+information or if the scattered data is nothing more than the
+manifestation of the inherently probabilistic nature of the data
+generation process</strong>.</p>
+<p>The framework of hypothesis testing is all about making statistical
+inferences about populations based on samples taken from the population.
+Any hypothesis test involves the <strong>collection of data (sampling)</strong>. If
+the <strong>hypothesis</strong> is assumed to be correct, the scientist can calculate
+the <strong>expected results</strong> of an experiment. If the <strong>observed data</strong>
+differs significantly from the expected results, then one considers the
+assumption to be incorrect. Thus, based on the observed data the
+scientist makes a <strong>decision</strong> as to whether or not there is sufficient
+evidence, based upon analyses of the data, that the model - the
+hypothesis - should be rejected, or that there is not sufficient
+evidence to reject the stated hypothesis.</p>
+</div>
+<div class="section" id="Multiple-comparisons">
+<h2>4.4. Multiple comparisons<a class="headerlink" href="#Multiple-comparisons" title="Permalink to this headline">¶</a></h2>
+<p>The problem with multiple comparisons is that the more hypotheses are
+tested on a particular data set, the more likely it is to incorrectly
+reject the null hypothesis. Thus, methods of multiple comparison require
+a higher significance threshold (<span class="math notranslate">\(\alpha\)</span>) for individual
+comparisons, in order to compensate for the number of inferences being
+made.</p>
+<p><strong>The Family-wise error rate</strong></p>
+<p>The family-wise error rate is the probability of making one or more
+false discoveries, or <strong>Type I errors</strong> when performing multiple
+hypotheses tests.</p>
+<p>Recall that at a significance level of <span class="math notranslate">\(\alpha=0.05\)</span>, the
+probability of making a Type I error is equal to <span class="math notranslate">\(0.05\)</span> or
+<span class="math notranslate">\(5\%\)</span>. Consequently, the probability of not making a Type I error
+is <span class="math notranslate">\(1-\alpha=1-0.05=0.95\)</span>.</p>
+<p>Written more formally, for a family of <span class="math notranslate">\(C\)</span> tests, the probability
+of making a Type I error for the whole family is</p>
+<div class="math notranslate">
+\[(1-\alpha)^C\text{.}\]</div>
+<p>Let us now consider <span class="math notranslate">\(C=4\)</span> and <span class="math notranslate">\(\alpha=0.05\)</span>.</p>
+<p>Thus, if we make 4 multiple comparisons on one data set, the probability
+of not making one or more Type I errors on the family of tests is
+<span class="math notranslate">\((1-\alpha)^C = (1−0.05)^4 = 0.81\)</span></p>
+<p>Null hypothesis <span class="math notranslate">\(H_0:\quad \mu_1 = \mu_2 = \mu_3 = \mu_4\)</span></p>
+<p>Alternative hypothesis
+<span class="math notranslate">\(H_A:\quad \mu_1 \ne \mu_2 \ne \mu_3 \ne \mu_4\)</span></p>
+<p><strong>Tukey’s HSD (Honestly Significant Difference)</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">statsmodels.sandbox.stats.multicomp</span> <span class="k">import</span> <span class="n">MultiComparison</span>
+<span class="n">mult_comp</span> <span class="o">=</span> <span class="n">MultiComparison</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">chicken</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">],</span> <span class="n">groups</span><span class="o">=</span><span class="n">chicken</span><span class="p">[</span><span class="s2">&quot;Diet&quot;</span><span class="p">])</span>
+<span class="n">mult_comp</span><span class="o">.</span><span class="n">tukeyhsd</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<table class="simpletable">
+<caption>Multiple Comparison of Means - Tukey HSD,FWER=0.05</caption>
+<tr>
+  <th>group1</th> <th>group2</th> <th>meandiff</th>   <th>lower</th>   <th>upper</th>  <th>reject</th>
+</tr>
+<tr>
+     <td>1</td>      <td>2</td>     <td>24.45</td>   <td>-4.5779</td> <td>53.4779</td>  <td>False</td>
+</tr>
+<tr>
+     <td>1</td>      <td>3</td>     <td>44.95</td>   <td>15.9221</td> <td>73.9779</td>  <td>True</td>
+</tr>
+<tr>
+     <td>1</td>      <td>4</td>     <td>36.75</td>   <td>7.7221</td>  <td>65.7779</td>  <td>True</td>
+</tr>
+<tr>
+     <td>2</td>      <td>3</td>     <td>20.5</td>   <td>-13.0186</td> <td>54.0186</td>  <td>False</td>
+</tr>
+<tr>
+     <td>2</td>      <td>4</td>     <td>12.3</td>   <td>-21.2186</td> <td>45.8186</td>  <td>False</td>
+</tr>
+<tr>
+     <td>3</td>      <td>4</td>     <td>-8.2</td>   <td>-41.7186</td> <td>25.3186</td>  <td>False</td>
+</tr>
+</table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">_</span> <span class="o">=</span> <span class="n">mult_comp</span><span class="o">.</span><span class="n">tukeyhsd</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="o">.</span><span class="n">plot_simultaneous</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/03_Inferential_Statistics_26_0.png" src="_images/03_Inferential_Statistics_26_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="02_Plotting.html" class="btn btn-neutral" title="3. Plotting with Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Krois Joachhim.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

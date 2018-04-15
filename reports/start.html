@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Lunchtime Science &mdash; Lunchtime Science  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Getting started with Jupyter Notebooks" href="00_getting started.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Lunchtime Science
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="00_getting started.html">1. Getting started with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_A simple data analysis.html">2. Processing of tabular data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Plotting.html">3. Plotting with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inferential Statistics.html">4. The statsmodels library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Lunchtime Science</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Lunchtime Science</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="lunchtime-science">
+<h1>Lunchtime Science<a class="headerlink" href="#lunchtime-science" title="Permalink to this headline">¶</a></h1>
+<p><strong>Scientific Computing and Reproducible Research</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authors:</th><td class="field-body">Dr. Joachim Krois</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">CharitéCentrum 3 für Zahn-, Mund- und Kieferheilkunde</div>
+<div class="line">Charité – Universitätsmedizin Berlin</div>
+<div class="line">Aßmannshauser Str. 4-6</div>
+<div class="line">14197 Berlin</div>
+<div class="line">030-450562328</div>
+<div class="line"><a class="reference external" href="mailto:joachim&#46;krois&#37;&#52;&#48;charite&#46;de">joachim<span>&#46;</span>krois<span>&#64;</span>charite<span>&#46;</span>de</a></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">Apr 15, 2018</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All materials are available on <a class="reference external" href="https://github.com/eotp/lunchtime-science-2018">github</a>. For analysis we used Python’s scientific stack and <a class="reference external" href="http://jupyter.org/">Jupyter</a> Notebooks.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="00_getting started.html">1. Getting started with Jupyter Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_getting started.html#My-chat-bot">1.1. My chat bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_getting started.html#Markdown">1.2. Markdown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="00_getting started.html#The-normal-distribution">1.2.1. The normal distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_getting started.html#Images">1.2.2. Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_getting started.html#pdf-files">1.2.3. pdf-files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_A simple data analysis.html">2. Processing of tabular data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_A simple data analysis.html#Read-the-data">2.1. Read the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_A simple data analysis.html#Inspect-the-data">2.2. Inspect the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_A simple data analysis.html#Exploratory-Data-Analysis">2.3. Exploratory Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_A simple data analysis.html#Analyzing-a-subset-of-the-dataset">2.4. Analyzing a subset of the dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="01_A simple data analysis.html#Split-Apply-Combine">2.4.1. Split-Apply-Combine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_A simple data analysis.html#Plotting">2.4.2. Plotting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_Plotting.html">3. Plotting with Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Plotting.html#The-Python-Visualization-Landscape">3.1. The Python Visualization Landscape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Plotting.html#Holoviews">3.2. Holoviews</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inferential Statistics.html">4. The statsmodels library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Inferential Statistics.html#Population-and-Sample-Statistics">4.1. Population and Sample Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Inferential Statistics.html#Point-Estimate-and-Confidence-Interval">4.2. Point Estimate and Confidence Interval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="03_Inferential Statistics.html#Interval-Estimate">4.2.1. Interval Estimate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="03_Inferential Statistics.html#Hypothesis-Testing">4.3. Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Inferential Statistics.html#Multiple-comparisons">4.4. Multiple comparisons</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="00_getting started.html" class="btn btn-neutral float-right" title="1. Getting started with Jupyter Notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Krois Joachhim.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

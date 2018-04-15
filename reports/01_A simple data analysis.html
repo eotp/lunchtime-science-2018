@@ -1,0 +1,1593 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Processing of tabular data &mdash; Lunchtime Science  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Plotting with Python" href="02_Plotting.html" />
+    <link rel="prev" title="1. Getting started with Jupyter Notebooks" href="00_getting started.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="start.html" class="icon icon-home"> Lunchtime Science
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_getting started.html">1. Getting started with Jupyter Notebooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Processing of tabular data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Read-the-data">2.1. Read the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Inspect-the-data">2.2. Inspect the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Exploratory-Data-Analysis">2.3. Exploratory Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Analyzing-a-subset-of-the-dataset">2.4. Analyzing a subset of the dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Split-Apply-Combine">2.4.1. Split-Apply-Combine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Plotting">2.4.2. Plotting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_Plotting.html">3. Plotting with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inferential Statistics.html">4. The statsmodels library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="start.html">Lunchtime Science</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="start.html">Docs</a> &raquo;</li>
+        
+      <li>2. Processing of tabular data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/01_A simple data analysis.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Processing-of-tabular-data">
+<h1>2. Processing of tabular data<a class="headerlink" href="#Processing-of-tabular-data" title="Permalink to this headline">¶</a></h1>
+<p><strong>Import Statements</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Read-the-data">
+<h2>2.1. Read the data<a class="headerlink" href="#Read-the-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Read</strong> <code class="docutils literal notranslate"><span class="pre">.csv</span></code> <strong>file</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/IHME_GBD_2016_POPULATION_ESTIMATES_1990_2016_Y2017M09D14.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>location_id</th>
+      <th>location_name</th>
+      <th>sex_id</th>
+      <th>sex_name</th>
+      <th>age_group_id</th>
+      <th>age_group_name</th>
+      <th>year_id</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1990</td>
+      <td>3.073378e+08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1990</td>
+      <td>2.911299e+08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1990</td>
+      <td>5.984677e+08</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1991</td>
+      <td>3.089656e+08</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1991</td>
+      <td>2.921822e+08</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1991</td>
+      <td>6.011477e+08</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1992</td>
+      <td>3.096011e+08</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1992</td>
+      <td>2.923199e+08</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1992</td>
+      <td>6.019210e+08</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1993</td>
+      <td>3.094043e+08</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1993</td>
+      <td>2.916887e+08</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1993</td>
+      <td>6.010930e+08</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1994</td>
+      <td>3.086484e+08</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1994</td>
+      <td>2.905336e+08</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1994</td>
+      <td>5.991819e+08</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1995</td>
+      <td>3.075657e+08</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1995</td>
+      <td>2.891986e+08</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1995</td>
+      <td>5.967643e+08</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1996</td>
+      <td>3.065156e+08</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1996</td>
+      <td>2.880295e+08</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1996</td>
+      <td>5.945451e+08</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1997</td>
+      <td>3.057610e+08</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1997</td>
+      <td>2.871451e+08</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1997</td>
+      <td>5.929061e+08</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1998</td>
+      <td>3.052792e+08</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1998</td>
+      <td>2.865252e+08</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1998</td>
+      <td>5.918044e+08</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1999</td>
+      <td>3.050629e+08</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1999</td>
+      <td>2.861586e+08</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1</td>
+      <td>Global</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>1</td>
+      <td>Under 5</td>
+      <td>1999</td>
+      <td>5.912215e+08</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>603906</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2007</td>
+      <td>1.079713e+05</td>
+    </tr>
+    <tr>
+      <th>603907</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2007</td>
+      <td>2.470795e+05</td>
+    </tr>
+    <tr>
+      <th>603908</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2007</td>
+      <td>3.550508e+05</td>
+    </tr>
+    <tr>
+      <th>603909</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2008</td>
+      <td>1.158280e+05</td>
+    </tr>
+    <tr>
+      <th>603910</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2008</td>
+      <td>2.643836e+05</td>
+    </tr>
+    <tr>
+      <th>603911</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2008</td>
+      <td>3.802115e+05</td>
+    </tr>
+    <tr>
+      <th>603912</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2009</td>
+      <td>1.238045e+05</td>
+    </tr>
+    <tr>
+      <th>603913</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2009</td>
+      <td>2.820579e+05</td>
+    </tr>
+    <tr>
+      <th>603914</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2009</td>
+      <td>4.058625e+05</td>
+    </tr>
+    <tr>
+      <th>603915</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2010</td>
+      <td>1.317829e+05</td>
+    </tr>
+    <tr>
+      <th>603916</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2010</td>
+      <td>3.002316e+05</td>
+    </tr>
+    <tr>
+      <th>603917</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2010</td>
+      <td>4.320145e+05</td>
+    </tr>
+    <tr>
+      <th>603918</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2011</td>
+      <td>1.393521e+05</td>
+    </tr>
+    <tr>
+      <th>603919</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2011</td>
+      <td>3.193522e+05</td>
+    </tr>
+    <tr>
+      <th>603920</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2011</td>
+      <td>4.587043e+05</td>
+    </tr>
+    <tr>
+      <th>603921</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2012</td>
+      <td>1.465375e+05</td>
+    </tr>
+    <tr>
+      <th>603922</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2012</td>
+      <td>3.389070e+05</td>
+    </tr>
+    <tr>
+      <th>603923</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2012</td>
+      <td>4.854444e+05</td>
+    </tr>
+    <tr>
+      <th>603924</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2013</td>
+      <td>1.522679e+05</td>
+    </tr>
+    <tr>
+      <th>603925</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2013</td>
+      <td>3.577482e+05</td>
+    </tr>
+    <tr>
+      <th>603926</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2013</td>
+      <td>5.100161e+05</td>
+    </tr>
+    <tr>
+      <th>603927</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2014</td>
+      <td>1.576811e+05</td>
+    </tr>
+    <tr>
+      <th>603928</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2014</td>
+      <td>3.768860e+05</td>
+    </tr>
+    <tr>
+      <th>603929</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2014</td>
+      <td>5.345671e+05</td>
+    </tr>
+    <tr>
+      <th>603930</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2015</td>
+      <td>1.640926e+05</td>
+    </tr>
+    <tr>
+      <th>603931</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2015</td>
+      <td>3.984956e+05</td>
+    </tr>
+    <tr>
+      <th>603932</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2015</td>
+      <td>5.625882e+05</td>
+    </tr>
+    <tr>
+      <th>603933</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2016</td>
+      <td>1.766505e+05</td>
+    </tr>
+    <tr>
+      <th>603934</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2016</td>
+      <td>4.302028e+05</td>
+    </tr>
+    <tr>
+      <th>603935</th>
+      <td>44639</td>
+      <td>Middle SDI</td>
+      <td>3</td>
+      <td>Both</td>
+      <td>235</td>
+      <td>95 plus</td>
+      <td>2016</td>
+      <td>6.068534e+05</td>
+    </tr>
+  </tbody>
+</table>
+<p>603936 rows × 8 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="Inspect-the-data">
+<h2>2.2. Inspect the data<a class="headerlink" href="#Inspect-the-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Columns</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Index([&#39;location_id&#39;, &#39;location_name&#39;, &#39;sex_id&#39;, &#39;sex_name&#39;, &#39;age_group_id&#39;,
+       &#39;age_group_name&#39;, &#39;year_id&#39;, &#39;pop&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Exploratory-Data-Analysis">
+<h2>2.3. Exploratory Data Analysis<a class="headerlink" href="#Exploratory-Data-Analysis" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">location_name</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[5]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>231
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">location_name</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>144698       Estonia
+40832       Thailand
+403673    South Asia
+147172        Latvia
+110428      Bulgaria
+603780    Middle SDI
+109556      Bulgaria
+117402       Hungary
+209836       Iceland
+479853      Tanzania
+Name: location_name, dtype: object
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">sex_name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([&#39;Male&#39;, &#39;Female&#39;, &#39;Both&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">age_group_name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([&#39;Under 5&#39;, &#39;Early Neonatal&#39;, &#39;Late Neonatal&#39;, &#39;Post Neonatal&#39;,
+       &#39;1 to 4&#39;, &#39;5 to 9&#39;, &#39;10 to 14&#39;, &#39;15 to 19&#39;, &#39;20 to 24&#39;, &#39;25 to 29&#39;,
+       &#39;30 to 34&#39;, &#39;35 to 39&#39;, &#39;40 to 44&#39;, &#39;45 to 49&#39;, &#39;50 to 54&#39;,
+       &#39;55 to 59&#39;, &#39;60 to 64&#39;, &#39;65 to 69&#39;, &#39;70 to 74&#39;, &#39;75 to 79&#39;,
+       &#39;All Ages&#39;, &#39;5-14 years&#39;, &#39;15-49 years&#39;, &#39;50-69 years&#39;,
+       &#39;70+ years&#39;, &#39;&lt;1 year&#39;, &#39;80 to 84&#39;, &#39;85 to 89&#39;, &#39;90 to 94&#39;,
+       &#39;&lt;20 years&#39;, &#39;10-24 years&#39;, &#39;95 plus&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Analyzing-a-subset-of-the-dataset">
+<h2>2.4. Analyzing a subset of the dataset<a class="headerlink" href="#Analyzing-a-subset-of-the-dataset" title="Permalink to this headline">¶</a></h2>
+<p><strong>Subsetting</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5-14 years&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;15-49 years&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;50-69 years&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;70+ years&#39;</span><span class="p">]</span>
+<span class="n">location</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Italy&quot;</span><span class="p">]</span>
+<span class="n">sex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">]</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">age_group_name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">ages</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">location_name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">sex_name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop_subset</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cond</span><span class="p">,:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop_subset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">pop_subset</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(648, 8)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>location_id</th>
+      <th>location_name</th>
+      <th>sex_id</th>
+      <th>sex_name</th>
+      <th>age_group_id</th>
+      <th>age_group_name</th>
+      <th>year_id</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>204087</th>
+      <td>81</td>
+      <td>Germany</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>25</td>
+      <td>50-69 years</td>
+      <td>2006</td>
+      <td>9966920.66</td>
+    </tr>
+    <tr>
+      <th>217120</th>
+      <td>86</td>
+      <td>Italy</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>70+ years</td>
+      <td>2003</td>
+      <td>4778254.10</td>
+    </tr>
+    <tr>
+      <th>203982</th>
+      <td>81</td>
+      <td>Germany</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>24</td>
+      <td>15-49 years</td>
+      <td>1998</td>
+      <td>20448121.85</td>
+    </tr>
+    <tr>
+      <th>217014</th>
+      <td>86</td>
+      <td>Italy</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>25</td>
+      <td>50-69 years</td>
+      <td>1995</td>
+      <td>6345742.33</td>
+    </tr>
+    <tr>
+      <th>201487</th>
+      <td>80</td>
+      <td>France</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>25</td>
+      <td>50-69 years</td>
+      <td>2003</td>
+      <td>6695824.46</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="Split-Apply-Combine">
+<h3>2.4.1. Split-Apply-Combine<a class="headerlink" href="#Split-Apply-Combine" title="Permalink to this headline">¶</a></h3>
+<p><img alt="image0" src="_images/split-apply-combine.png" /> Image source: <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Jake VanderPlas 2016, Data Science
+Handbook</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">pop_subset</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;year_id&quot;</span><span class="p">,</span> <span class="s2">&quot;location_name&quot;</span><span class="p">])[</span><span class="s2">&quot;pop&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">gb</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[11]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>year_id  location_name
+1990     France           52924678.45
+         Germany          74905392.07
+         Italy            53965720.67
+1991     France           53204997.81
+         Germany          75282202.61
+         Italy            54096588.22
+1992     France           53491245.78
+         Germany          75846260.69
+         Italy            54185851.15
+1993     France           53764681.77
+         Germany          76382332.04
+         Italy            54181997.23
+1994     France           54014103.00
+         Germany          76711513.38
+         Italy            54185577.66
+1995     France           54244201.26
+         Germany          77017974.10
+         Italy            54196349.68
+1996     France           54453151.38
+         Germany          77271569.64
+         Italy            54215293.54
+1997     France           54652082.22
+         Germany          77347967.36
+         Italy            54261314.98
+1998     France           54837898.37
+         Germany          77306087.32
+         Italy            54309603.01
+1999     France           55080702.99
+         Germany          77293813.76
+         Italy            54329309.93
+                             ...
+2007     France           58140459.87
+         Germany          77410998.63
+         Italy            55715794.01
+2008     France           58458362.46
+         Germany          77257023.21
+         Italy            56075640.98
+2009     France           58750572.26
+         Germany          77093829.71
+         Italy            56330724.78
+2010     France           59034248.17
+         Germany          76974942.55
+         Italy            56517916.98
+2011     France           59333389.35
+         Germany          76936624.35
+         Italy            56633630.78
+2012     France           59628203.78
+         Germany          77038235.71
+         Italy            56805924.59
+2013     France           59907632.52
+         Germany          77242754.95
+         Italy            57081736.70
+2014     France           60200287.87
+         Germany          77653446.03
+         Italy            57366276.76
+2015     France           60607027.88
+         Germany          78112961.81
+         Italy            57659331.41
+2016     France           61020069.08
+         Germany          78619000.77
+         Italy            57960714.36
+Name: pop, Length: 81, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plotting">
+<h3>2.4.2. Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gb</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/01_A_simple_data_analysis_23_0.png" src="_images/01_A_simple_data_analysis_23_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">({</span><span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pop_subset</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s1">&#39;age_group_name&#39;</span><span class="p">,</span>
+                  <span class="n">col</span><span class="o">=</span><span class="s1">&#39;location_name&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex_name&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span> <span class="s2">&quot;year_id&quot;</span><span class="p">,</span> <span class="s2">&quot;pop&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">7</span><span class="p">)</span>
+<span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">texts</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">]</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">row_template</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{row_name}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">col_template</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{col_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/01_A_simple_data_analysis_25_0.png" src="_images/01_A_simple_data_analysis_25_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_Plotting.html" class="btn btn-neutral float-right" title="3. Plotting with Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="00_getting started.html" class="btn btn-neutral" title="1. Getting started with Jupyter Notebooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Krois Joachhim.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

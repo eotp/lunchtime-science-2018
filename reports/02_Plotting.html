@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Plotting with Python &mdash; Lunchtime Science  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. The statsmodels library" href="03_Inferential Statistics.html" />
+    <link rel="prev" title="2. Processing of tabular data" href="01_A simple data analysis.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="start.html" class="icon icon-home"> Lunchtime Science
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_getting started.html">1. Getting started with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_A simple data analysis.html">2. Processing of tabular data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Plotting with Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#The-Python-Visualization-Landscape">3.1. The Python Visualization Landscape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Holoviews">3.2. Holoviews</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inferential Statistics.html">4. The statsmodels library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="start.html">Lunchtime Science</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="start.html">Docs</a> &raquo;</li>
+        
+      <li>3. Plotting with Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/02_Plotting.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Plotting-with-Python">
+<h1>3. Plotting with Python<a class="headerlink" href="#Plotting-with-Python" title="Permalink to this headline">¶</a></h1>
+<p><strong>Plotting is an essential component of data analysis</strong>. It helps you to
+understand complex data sets and help others understand them too.
+However, the python visualization world can be a frustrating place.
+There are many different options and choosing the right one is a
+challenge.</p>
+<div class="section" id="The-Python-Visualization-Landscape">
+<h2>3.1. The Python Visualization Landscape<a class="headerlink" href="#The-Python-Visualization-Landscape" title="Permalink to this headline">¶</a></h2>
+<p><img alt="image0" src="_images/landscape.png" /></p>
+<p>Source: <a class="reference external" href="https://github.com/rougier/python-visualization-landscape">Nicolas P.
+Rougier</a>:
+An adaptation the Python Visualization Landscape slide from <a class="reference external" href="http://vanderplas.com/">Jake
+VanderPlas</a>’ keynote at PyCon 2017
+(<a class="reference external" href="https://speakerdeck.com/jakevdp/pythons-visualization-landscape-pycon-2017">slides</a>,
+<a class="reference external" href="https://www.youtube.com/watch?v=FytuB8nFHPQ">video</a>).</p>
+<p>Online you find many post and reports which compare and assess different
+Python libraries (e.g.&nbsp;blog post by <a class="reference external" href="https://dsaber.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/">Dan
+Saber</a>
+or by <a class="reference external" href="http://pythonplot.com/">Tim Hopper</a>). These are very valuable
+sources of information if you are not yet sure which library fits best
+your needs.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="Holoviews">
+<h2>3.2. Holoviews<a class="headerlink" href="#Holoviews" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://holoviews.org/">HoloViews</a> is an open-source Python library
+designed to make data analysis and visualization seamless and simple.
+With HoloViews, you can usually express what you want to do in very few
+lines of code, letting you focus on what you are trying to explore and
+convey, not on the process of plotting.</p>
+<p><strong>A Reproduction of Gapminder</strong></p>
+<p>In <a class="reference external" href="https://de.wikipedia.org/wiki/Hans_Rosling">Hans Rosling’s</a>
+iconic <a class="reference external" href="https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen">TED
+Talk</a>
+he shows us that many advances have been made since the 60s, when our
+notions of development were established. The engaging infographic
+illustrates how our ongoing perceptions of a “first world” and a “third
+world” are wrong, and that the world has become a spectrum of developing
+countries.</p>
+<p>Gapminder demo demonstrating how to combine to extend a HoloViews plot
+with custom bokeh widgets to deploy an app (<a class="reference external" href="http://holoviews.org/gallery/apps/bokeh/gapminder.html#bokeh-gallery-gapminder">Source
+code</a>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="k">import</span> <span class="n">curdoc</span><span class="p">,</span> <span class="n">output_notebook</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">bokeh.application.handlers</span> <span class="k">import</span> <span class="n">FunctionHandler</span>
+<span class="kn">from</span> <span class="nn">bokeh.application</span> <span class="k">import</span> <span class="n">Application</span>
+<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="k">import</span> <span class="n">layout</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="k">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">holoviews.plotting.bokeh</span> <span class="k">import</span> <span class="n">BokehRenderer</span>
+
+<span class="c1"># Activate bokeh</span>
+<span class="n">output_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+WARNING: param.Version now supports PEP440 and a new tag based workflow. See param/version.py for more details
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="bk-root">
+    <a href="https://bokeh.pydata.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
+    <span id="60660251-cc1b-423c-84f7-c80f15bb7cea">Loading BokehJS ...</span>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  var force = true;
+
+  if (typeof (root._bokeh_onload_callbacks) === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+  var JS_MIME_TYPE = 'application/javascript';
+  var HTML_MIME_TYPE = 'text/html';
+  var EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  var CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    var script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    var cell = handle.cell;
+
+    var id = cell.output_area._bokeh_element_id;
+    var server_id = cell.output_area._bokeh_server_id;
+    // Clean up Bokeh references
+    if (id !== undefined) {
+      Bokeh.index[id].model.document.clear();
+      delete Bokeh.index[id];
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      var cmd = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd, {
+        iopub: {
+          output: function(msg) {
+            var element_id = msg.content.text.trim();
+            Bokeh.index[element_id].model.document.clear();
+            delete Bokeh.index[element_id];
+          }
+        }
+      });
+      // Destroy server and session
+      var cmd = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    var output_area = handle.output_area;
+    var output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+      return
+    }
+
+    var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      var bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      var script_attrs = bk_div.children[0].attributes;
+      for (var i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      var toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+
+
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  var NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded() {
+    var el = document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea");
+    if (el != null) {
+      el.textContent = "BokehJS is loading...";
+    }
+    if (root.Bokeh !== undefined) {
+      if (el != null) {
+        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(display_loaded, 100)
+    }
+  }
+
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) { callback() });
+    }
+    finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.info("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(js_urls, callback) {
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.log("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.log("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = js_urls.length;
+    for (var i = 0; i < js_urls.length; i++) {
+      var url = js_urls[i];
+      var s = document.createElement('script');
+      s.src = url;
+      s.async = false;
+      s.onreadystatechange = s.onload = function() {
+        root._bokeh_is_loading--;
+        if (root._bokeh_is_loading === 0) {
+          console.log("Bokeh: all BokehJS libraries loaded");
+          run_callbacks()
+        }
+      };
+      s.onerror = function() {
+        console.warn("failed to load library " + url);
+      };
+      console.log("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.getElementsByTagName("head")[0].appendChild(s);
+    }
+  };var element = document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea");
+  if (element == null) {
+    console.log("Bokeh: ERROR: autoload.js configured with elementid '60660251-cc1b-423c-84f7-c80f15bb7cea' but no matching script tag was found. ")
+    return false;
+  }
+
+  var js_urls = ["https://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.js", "https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.15.min.js", "https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.15.min.js", "https://cdn.pydata.org/bokeh/release/bokeh-gl-0.12.15.min.js"];
+
+  var inline_js = [
+    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+
+    function(Bokeh) {
+
+    },
+    function(Bokeh) {
+      console.log("Bokeh: injecting CSS: https://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.css");
+      Bokeh.embed.inject_css("https://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.css");
+      console.log("Bokeh: injecting CSS: https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.15.min.css");
+      Bokeh.embed.inject_css("https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.15.min.css");
+      console.log("Bokeh: injecting CSS: https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.15.min.css");
+      Bokeh.embed.inject_css("https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.15.min.css");
+    }
+  ];
+
+  function run_inline_js() {
+
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (var i = 0; i < inline_js.length; i++) {
+        inline_js[i].call(root, root.Bokeh);
+      }if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      var cell = $(document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.log("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(js_urls, function() {
+      console.log("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Load data set</span>
+<span class="n">gapminder_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/gapminder.csv&quot;</span><span class="p">)</span>
+<span class="c1"># Declare data set</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">gapminder_df</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gapminder_plot</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="c1"># Apply dimension labels and ranges</span>
+    <span class="n">kdims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fertility&#39;</span><span class="p">,</span> <span class="s1">&#39;Life expectancy&#39;</span><span class="p">]</span>
+    <span class="n">vdims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Population&#39;</span><span class="p">,</span> <span class="s1">&#39;Group&#39;</span><span class="p">]</span>
+    <span class="n">dimensions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Fertility&#39;</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Children per woman (total fertility)&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span>
+        <span class="s1">&#39;Life expectancy&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Life expectancy at birth (years)&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span>
+        <span class="s1">&#39;Population&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="s1">&#39;Population&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Create Points plotting fertility vs life expectancy indexed by Year</span>
+    <span class="n">gapminder_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">redim</span><span class="p">(</span><span class="o">**</span><span class="n">dimensions</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">hv</span><span class="o">.</span><span class="n">Points</span><span class="p">,</span> <span class="n">kdims</span><span class="p">,</span> <span class="n">vdims</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define annotations</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">gapminder_ds</span><span class="o">.</span><span class="n">clone</span><span class="p">({</span><span class="n">yr</span><span class="p">:</span> <span class="n">hv</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">yr</span><span class="p">)),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+                               <span class="k">for</span> <span class="n">yr</span> <span class="ow">in</span> <span class="n">gapminder_ds</span><span class="o">.</span><span class="n">keys</span><span class="p">()})</span>
+
+    <span class="c1"># Define options</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;plot&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">950</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hover&#39;</span><span class="p">],</span> <span class="n">size_index</span><span class="o">=</span><span class="s1">&#39;Population&#39;</span><span class="p">,</span>
+                         <span class="n">color_index</span><span class="o">=</span><span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="n">size_fn</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">,</span> <span class="n">title_format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">),</span>
+           <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set1&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)}</span>
+    <span class="n">text_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">text_font_size</span><span class="o">=</span><span class="s1">&#39;52pt&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)}</span>
+
+    <span class="c1"># Combine Points and Text</span>
+    <span class="n">hvgapminder</span> <span class="o">=</span> <span class="p">(</span><span class="n">gapminder_ds</span><span class="p">({</span><span class="s1">&#39;Points&#39;</span><span class="p">:</span> <span class="n">opts</span><span class="p">})</span> <span class="o">*</span> <span class="n">text</span><span class="p">({</span><span class="s1">&#39;Text&#39;</span><span class="p">:</span> <span class="n">text_opts</span><span class="p">}))</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="s1">&#39;Gapminder Demo&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define custom widgets</span>
+    <span class="k">def</span> <span class="nf">animate_update</span><span class="p">():</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">year</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">year</span>
+
+    <span class="c1"># Update the holoviews plot by calling update with the new year.</span>
+    <span class="k">def</span> <span class="nf">slider_update</span><span class="p">(</span><span class="n">attrname</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="n">hvplot</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">new</span><span class="p">,))</span>
+
+    <span class="k">def</span> <span class="nf">animate</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">button</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;► Play&#39;</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;❚❚ Pause&#39;</span>
+            <span class="n">doc</span><span class="o">.</span><span class="n">add_periodic_callback</span><span class="p">(</span><span class="n">animate_update</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;► Play&#39;</span>
+            <span class="n">doc</span><span class="o">.</span><span class="n">remove_periodic_callback</span><span class="p">(</span><span class="n">animate_update</span><span class="p">)</span>
+
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">slider</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">on_change</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">slider_update</span><span class="p">)</span>
+
+    <span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;► Play&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">animate</span><span class="p">)</span>
+
+    <span class="c1"># Get HoloViews plot</span>
+    <span class="n">hvplot</span> <span class="o">=</span> <span class="n">BokehRenderer</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="n">hvgapminder</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+    <span class="c1"># Make a bokeh layout and add it as the Document root</span>
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">layout</span><span class="p">([[</span><span class="n">hvplot</span><span class="o">.</span><span class="n">state</span><span class="p">],</span> <span class="p">[</span><span class="n">slider</span><span class="p">,</span> <span class="n">button</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;fixed&#39;</span><span class="p">)</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">add_root</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># To display in the notebook</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">FunctionHandler</span><span class="p">(</span><span class="n">gapminder_plot</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+INFO:bokeh.server.server:Starting Bokeh server version 0.12.15 (running on Tornado 5.0.1)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script
+    src="http://localhost:51809/autoload.js?bokeh-autoload-element=c086e3f3-a63a-4561-b8d8-16a7571e520e&bokeh-absolute-url=http://localhost:51809&resources=none"
+    id="c086e3f3-a63a-4561-b8d8-16a7571e520e"
+    data-bokeh-model-id=""
+    data-bokeh-doc-id=""
+></script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+INFO:tornado.access:200 GET /autoload.js?bokeh-autoload-element=c086e3f3-a63a-4561-b8d8-16a7571e520e&amp;bokeh-absolute-url=http://localhost:51809&amp;resources=none (::1) 1060.80ms
+INFO:tornado.access:101 GET /ws?bokeh-protocol-version=1.0&amp;bokeh-session-id=udakh3tme3NejJg7dYak8mQ86sKuc76Bq3PkO4v7frV1 (::1) 0.00ms
+INFO:bokeh.server.views.ws:WebSocket connection opened
+INFO:bokeh.server.views.ws:ServerConnection created
+INFO:bokeh.server.views.ws:WebSocket connection closed: code=None, reason=None
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03_Inferential Statistics.html" class="btn btn-neutral float-right" title="4. The statsmodels library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01_A simple data analysis.html" class="btn btn-neutral" title="2. Processing of tabular data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Krois Joachhim.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
