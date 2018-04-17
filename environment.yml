@@ -142,6 +142,5 @@ dependencies:
   - jupyter-core==4.4.0
   - prompt-toolkit==1.0.15
   - sphinx-rtd-theme==0.3.0
-  - win-inet-pton==1.0.1
 prefix: C:\Users\josi\Miniconda3\envs\lunchtime
 
