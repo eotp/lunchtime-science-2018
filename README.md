@@ -1,4 +1,4 @@
-# Materials for a talk at Lunchtime Science at Charié Berlin, April 18<sup>th</sup>, 2018
+# Materials for a talk at Lunchtime Science at Charité Berlin, April 18<sup>th</sup>, 2018
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/eotp/lunchtime-science-2018/master?filepath=notebooks)
 
