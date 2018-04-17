@@ -120,9 +120,6 @@ dependencies:
 - webencodings=0.5=py36_0
 - wheel=0.30.0=py36_2
 - widgetsnbextension=3.2.1=py36_0
-- win_inet_pton=1.0.1=py36_1
-- wincertstore=0.2=py36_0
-- winpty=0.4.3
 - wordcloud=1.4.1=py36_0
 - wrapt=1.10.11=py36_0
 - xlrd=1.1.0=py_2
