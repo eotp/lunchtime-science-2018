@@ -1219,7 +1219,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "> Question: How did the population of Germany, Italy and France change over time?"
+    "**Question: How did the population of Germany, Italy and France change over time?**"
    ]
   },
   {
