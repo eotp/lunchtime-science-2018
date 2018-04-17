@@ -1174,16 +1174,16 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>144698       Estonia
-40832       Thailand
-403673    South Asia
-147172        Latvia
-110428      Bulgaria
-603780    Middle SDI
-109556      Bulgaria
-117402       Hungary
-209836       Iceland
-479853      Tanzania
+<span></span>351788    North Africa and Middle East
+456458                        Ethiopia
+252414       High-income North America
+30795                         Maldives
+87678                       Kazakhstan
+7237                         East Asia
+113954                         Croatia
+171398                       Singapore
+13647                           Taiwan
+309660                         Ecuador
 Name: location_name, dtype: object
 </pre></div>
 </div>
@@ -1244,10 +1244,7 @@ Name: location_name, dtype: object
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5-14 years&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;15-49 years&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;50-69 years&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;70+ years&#39;</span><span class="p">]</span>
+<span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5-14 years&#39;</span><span class="p">,</span> <span class="s1">&#39;15-49 years&#39;</span><span class="p">,</span> <span class="s1">&#39;50-69 years&#39;</span><span class="p">,</span><span class="s1">&#39;70+ years&#39;</span><span class="p">]</span>
 <span class="n">location</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Italy&quot;</span><span class="p">]</span>
 <span class="n">sex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">]</span>
 <span class="n">cond</span> <span class="o">=</span> <span class="p">(</span>
@@ -1314,59 +1311,59 @@ Name: location_name, dtype: object
   </thead>
   <tbody>
     <tr>
-      <th>204087</th>
+      <th>204159</th>
       <td>81</td>
       <td>Germany</td>
       <td>1</td>
       <td>Male</td>
-      <td>25</td>
-      <td>50-69 years</td>
-      <td>2006</td>
-      <td>9966920.66</td>
-    </tr>
-    <tr>
-      <th>217120</th>
-      <td>86</td>
-      <td>Italy</td>
-      <td>2</td>
-      <td>Female</td>
       <td>26</td>
       <td>70+ years</td>
       <td>2003</td>
-      <td>4778254.10</td>
+      <td>3499564.87</td>
     </tr>
     <tr>
-      <th>203982</th>
-      <td>81</td>
-      <td>Germany</td>
-      <td>1</td>
-      <td>Male</td>
-      <td>24</td>
-      <td>15-49 years</td>
-      <td>1998</td>
-      <td>20448121.85</td>
-    </tr>
-    <tr>
-      <th>217014</th>
-      <td>86</td>
-      <td>Italy</td>
-      <td>1</td>
-      <td>Male</td>
-      <td>25</td>
-      <td>50-69 years</td>
-      <td>1995</td>
-      <td>6345742.33</td>
-    </tr>
-    <tr>
-      <th>201487</th>
+      <th>201460</th>
       <td>80</td>
       <td>France</td>
       <td>2</td>
       <td>Female</td>
       <td>25</td>
       <td>50-69 years</td>
-      <td>2003</td>
-      <td>6695824.46</td>
+      <td>1994</td>
+      <td>5854150.03</td>
+    </tr>
+    <tr>
+      <th>203886</th>
+      <td>81</td>
+      <td>Germany</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>23</td>
+      <td>5-14 years</td>
+      <td>1993</td>
+      <td>4515768.79</td>
+    </tr>
+    <tr>
+      <th>204177</th>
+      <td>81</td>
+      <td>Germany</td>
+      <td>1</td>
+      <td>Male</td>
+      <td>26</td>
+      <td>70+ years</td>
+      <td>2009</td>
+      <td>4616448.31</td>
+    </tr>
+    <tr>
+      <th>201484</th>
+      <td>80</td>
+      <td>France</td>
+      <td>2</td>
+      <td>Female</td>
+      <td>25</td>
+      <td>50-69 years</td>
+      <td>2002</td>
+      <td>6570676.64</td>
     </tr>
   </tbody>
 </table>
@@ -1374,7 +1371,7 @@ Name: location_name, dtype: object
 </div>
 <div class="section" id="Split-Apply-Combine">
 <h3>2.4.1. Split-Apply-Combine<a class="headerlink" href="#Split-Apply-Combine" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image0" src="_images/split-apply-combine.png" /> Image source: <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Jake VanderPlas 2016, Data Science
+<p><a href="#id1"><span class="problematic" id="id2">|image0|</span></a> Image source: <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Jake VanderPlas 2016, Data Science
 Handbook</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
@@ -1477,7 +1474,7 @@ Name: pop, Length: 81, dtype: float64
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/01_A_simple_data_analysis_23_0.png" src="_images/01_A_simple_data_analysis_23_0.png" />
+<img alt="_images/01_A_simple_data_analysis_24_0.png" src="_images/01_A_simple_data_analysis_24_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1512,7 +1509,7 @@ Name: pop, Length: 81, dtype: float64
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/01_A_simple_data_analysis_25_0.png" src="_images/01_A_simple_data_analysis_25_0.png" />
+<img alt="_images/01_A_simple_data_analysis_26_0.png" src="_images/01_A_simple_data_analysis_26_0.png" />
 </div>
 </div>
 </div>

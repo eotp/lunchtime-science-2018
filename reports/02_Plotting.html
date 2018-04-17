@@ -88,7 +88,10 @@
 <li class="toctree-l1"><a class="reference internal" href="01_A simple data analysis.html">2. Processing of tabular data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Plotting with Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#The-Python-Visualization-Landscape">3.1. The Python Visualization Landscape</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Holoviews">3.2. Holoviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Holoviews">3.2. Holoviews</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#A-Reproduction-of-Gapminder">3.2.1. A Reproduction of Gapminder</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_Inferential Statistics.html">4. The statsmodels library</a></li>
@@ -385,7 +388,8 @@ designed to make data analysis and visualization seamless and simple.
 With HoloViews, you can usually express what you want to do in very few
 lines of code, letting you focus on what you are trying to explore and
 convey, not on the process of plotting.</p>
-<p><strong>A Reproduction of Gapminder</strong></p>
+<div class="section" id="A-Reproduction-of-Gapminder">
+<h3>3.2.1. A Reproduction of Gapminder<a class="headerlink" href="#A-Reproduction-of-Gapminder" title="Permalink to this headline">¶</a></h3>
 <p>In <a class="reference external" href="https://de.wikipedia.org/wiki/Hans_Rosling">Hans Rosling’s</a>
 iconic <a class="reference external" href="https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen">TED
 Talk</a>
@@ -433,7 +437,7 @@ WARNING: param.Version now supports PEP440 and a new tag based workflow. See par
 <div class="output_area docutils container">
 <div class="bk-root">
     <a href="https://bokeh.pydata.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-    <span id="60660251-cc1b-423c-84f7-c80f15bb7cea">Loading BokehJS ...</span>
+    <span id="2829a16d-c955-491f-bd08-e2aec85112f4">Loading BokehJS ...</span>
 </div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -600,7 +604,7 @@ var element = document.currentScript.previousSibling.previousSibling;
      "</div>"}};
 
   function display_loaded() {
-    var el = document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea");
+    var el = document.getElementById("2829a16d-c955-491f-bd08-e2aec85112f4");
     if (el != null) {
       el.textContent = "BokehJS is loading...";
     }
@@ -654,9 +658,9 @@ var element = document.currentScript.previousSibling.previousSibling;
       console.log("Bokeh: injecting script tag for BokehJS library: ", url);
       document.getElementsByTagName("head")[0].appendChild(s);
     }
-  };var element = document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea");
+  };var element = document.getElementById("2829a16d-c955-491f-bd08-e2aec85112f4");
   if (element == null) {
-    console.log("Bokeh: ERROR: autoload.js configured with elementid '60660251-cc1b-423c-84f7-c80f15bb7cea' but no matching script tag was found. ")
+    console.log("Bokeh: ERROR: autoload.js configured with elementid '2829a16d-c955-491f-bd08-e2aec85112f4' but no matching script tag was found. ")
     return false;
   }
 
@@ -693,7 +697,7 @@ var element = document.currentScript.previousSibling.previousSibling;
       console.log("Bokeh: BokehJS failed to load within specified timeout.");
       root._bokeh_failed_load = true;
     } else if (force !== true) {
-      var cell = $(document.getElementById("60660251-cc1b-423c-84f7-c80f15bb7cea")).parents('.cell').data().cell;
+      var cell = $(document.getElementById("2829a16d-c955-491f-bd08-e2aec85112f4")).parents('.cell').data().cell;
       cell.output_area.append_execute_result(NB_LOAD_WARNING)
     }
 
@@ -809,8 +813,8 @@ INFO:bokeh.server.server:Starting Bokeh server version 0.12.15 (running on Torna
 </div>
 <div class="output_area docutils container">
 <script
-    src="http://localhost:51809/autoload.js?bokeh-autoload-element=c086e3f3-a63a-4561-b8d8-16a7571e520e&bokeh-absolute-url=http://localhost:51809&resources=none"
-    id="c086e3f3-a63a-4561-b8d8-16a7571e520e"
+    src="http://localhost:60784/autoload.js?bokeh-autoload-element=f6dae252-4165-40a5-9a4f-7d28444b9c70&bokeh-absolute-url=http://localhost:60784&resources=none"
+    id="f6dae252-4165-40a5-9a4f-7d28444b9c70"
     data-bokeh-model-id=""
     data-bokeh-doc-id=""
 ></script></div>
@@ -820,12 +824,12 @@ INFO:bokeh.server.server:Starting Bokeh server version 0.12.15 (running on Torna
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-INFO:tornado.access:200 GET /autoload.js?bokeh-autoload-element=c086e3f3-a63a-4561-b8d8-16a7571e520e&amp;bokeh-absolute-url=http://localhost:51809&amp;resources=none (::1) 1060.80ms
-INFO:tornado.access:101 GET /ws?bokeh-protocol-version=1.0&amp;bokeh-session-id=udakh3tme3NejJg7dYak8mQ86sKuc76Bq3PkO4v7frV1 (::1) 0.00ms
+INFO:tornado.access:200 GET /autoload.js?bokeh-autoload-element=f6dae252-4165-40a5-9a4f-7d28444b9c70&amp;bokeh-absolute-url=http://localhost:60784&amp;resources=none (::1) 982.80ms
+INFO:tornado.access:101 GET /ws?bokeh-protocol-version=1.0&amp;bokeh-session-id=5mX733ONVy0VBRJulyZrYO8QkHgJUGxdRpsbxdbV6fI9 (::1) 15.60ms
 INFO:bokeh.server.views.ws:WebSocket connection opened
 INFO:bokeh.server.views.ws:ServerConnection created
-INFO:bokeh.server.views.ws:WebSocket connection closed: code=None, reason=None
 </pre></div></div>
+</div>
 </div>
 </div>
 </div>

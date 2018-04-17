@@ -41,15 +41,7 @@
    "cell_type": "code",
    "execution_count": 1,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "C:\\Users\\josi\\Documents\\Lunchtime Science - April 2018\\lunchtime-science-2018\\src\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "import os\n",
     "import sys\n",
@@ -699,7 +691,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Multiple comparisons"
+    "### Multiple comparisons"
    ]
   },
   {

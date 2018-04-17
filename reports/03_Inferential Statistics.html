@@ -92,8 +92,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#Interval-Estimate">4.2.1. Interval Estimate</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Hypothesis-Testing">4.3. Hypothesis Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Multiple-comparisons">4.4. Multiple comparisons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Hypothesis-Testing">4.3. Hypothesis Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Multiple-comparisons">4.3.1. Multiple comparisons</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -375,7 +377,7 @@ different <strong>statistical models</strong>, as well as for conducting
 <li>and many more…</li>
 </ul>
 <p><strong>Add the</strong> <code class="docutils literal notranslate"><span class="pre">src</span></code> <strong>directory as one where we can import modules</strong></p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
@@ -390,14 +392,6 @@ different <strong>statistical models</strong>, as well as for conducting
 <span class="nb">print</span><span class="p">(</span><span class="n">src_dir</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-C:\Users\josi\Documents\Lunchtime Science - April 2018\lunchtime-science-2018\src
-</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
@@ -970,9 +964,8 @@ scientist makes a <strong>decision</strong> as to whether or not there is suffic
 evidence, based upon analyses of the data, that the model - the
 hypothesis - should be rejected, or that there is not sufficient
 evidence to reject the stated hypothesis.</p>
-</div>
 <div class="section" id="Multiple-comparisons">
-<h2>4.4. Multiple comparisons<a class="headerlink" href="#Multiple-comparisons" title="Permalink to this headline">¶</a></h2>
+<h3>4.3.1. Multiple comparisons<a class="headerlink" href="#Multiple-comparisons" title="Permalink to this headline">¶</a></h3>
 <p>The problem with multiple comparisons is that the more hypotheses are
 tested on a particular data set, the more likely it is to incorrectly
 reject the null hypothesis. Thus, methods of multiple comparison require
@@ -1057,6 +1050,7 @@ of not making one or more Type I errors on the family of tests is
 </div>
 <div class="output_area docutils container">
 <img alt="_images/03_Inferential_Statistics_26_0.png" src="_images/03_Inferential_Statistics_26_0.png" />
+</div>
 </div>
 </div>
 </div>
